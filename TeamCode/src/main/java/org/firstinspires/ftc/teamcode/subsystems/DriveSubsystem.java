@@ -73,6 +73,9 @@ public class DriveSubsystem extends SubsystemBase {
         return odometry.getPose();
     }
 
+    public double getHeading() {
+        return imu.getHeading();
+    }
     public void drive(double strafeSpeed, double forwardSpeed, double turnSpeed, double gyroHeading) {
         m_drive.driveFieldCentric(strafeSpeed, forwardSpeed, turnSpeed, gyroHeading );
     }
