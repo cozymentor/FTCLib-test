@@ -4,13 +4,14 @@ package org.firstinspires.ftc.teamcode;
 import com.arcrobotics.ftclib.command.CommandScheduler;
 import org.firstinspires.ftc.teamcode.commands.DefaultDriveCommand;
 import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
-
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 
 public class RobotContainer {
-    private final DriveSubsystem m_drive = new DriveSubsystem();
+    private HardwareMap m_hardwareMap;
+    private final DriveSubsystem m_drive = new DriveSubsystem(m_hardwareMap);
     GamepadEx m_gamePad;
     public RobotContainer() {
         configureButtonBindings();
@@ -20,7 +21,5 @@ public class RobotContainer {
     private void configureButtonBindings(){
         m_gamePad.getGamepadButton(GamepadKeys.Button.A)
                 .whenPressed(new InstantCommand());
-
-
     }
 }

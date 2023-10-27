@@ -23,7 +23,7 @@ import org.firstinspires.ftc.teamcode.DriveConstants;
 public class DriveSubsystem extends SubsystemBase {
 
     private MotorGroup leftMotors, rightMotors;
-    private HardwareMap hardwareMap;
+
     private Motor leftFront, rightFront, leftBack, rightBack;
 
     private MecanumDrive m_drive;
@@ -32,7 +32,7 @@ public class DriveSubsystem extends SubsystemBase {
     private HolonomicOdometry odometry;
     private MecanumDriveKinematics kinematics;
 
-    public DriveSubsystem() {
+    public DriveSubsystem(final HardwareMap hardwareMap) {
         leftFront = new Motor(hardwareMap, "front_left");
         rightFront = new Motor(hardwareMap, "front_right");
         leftBack = new Motor(hardwareMap, "back_left");
