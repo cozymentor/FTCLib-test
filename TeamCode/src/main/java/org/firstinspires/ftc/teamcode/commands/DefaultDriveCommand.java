@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.commands;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 import com.arcrobotics.ftclib.command.CommandBase;
 import java.util.function.DoubleSupplier;
 
@@ -21,6 +23,8 @@ public class DefaultDriveCommand extends CommandBase {
         m_heading = heading;
         addRequirements(m_drive);
     }
+
+    public void initialize() {}
 
     @Override
     public void execute() {

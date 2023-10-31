@@ -32,57 +32,26 @@ public class DriveSubsystem extends SubsystemBase {
     private HolonomicOdometry odometry;
     private MecanumDriveKinematics kinematics;
 
-    public DriveSubsystem() {
-
-    }
-
-    public void init(HardwareMap hardwareMap) {
-        leftFront = new Motor(hardwareMap, "front_left");
-        rightFront = new Motor(hardwareMap, "front_right");
-        leftBack = new Motor(hardwareMap, "back_left");
-        rightBack = new Motor(hardwareMap, "back_right");
-        leftEncoder = new MotorEx(hardwareMap, "left odometer");
-        rightEncoder = new MotorEx(hardwareMap, "right odometer");
-        latEncoder = new MotorEx(hardwareMap, "lateral odometer");
-        imu = new RevIMU(hardwareMap);
-        imu.init();
+    public DriveSubsystem(MotorEx frontLeft, MotorEx frontRight, MotorEx backLeft, MotorEx backRight, RevIMU imu) {
         this.leftFront = leftFront;
         this.rightFront = rightFront;
         this.leftBack = leftBack;
         this.rightBack = rightBack;
-        this.leftEncoder = leftEncoder;
-        this.rightEncoder = rightEncoder;
-        this.latEncoder = latEncoder;
         this.imu = imu;
+        this.imu.init();
         this.m_drive = new MecanumDrive(this.leftFront,this.rightFront,this.leftBack,this.rightBack);
 
-        odometry = new HolonomicOdometry(leftEncoder::getDistance,
-                rightEncoder::getDistance,
-                latEncoder::getDistance,
-                DriveConstants.TRACK_WIDTH,
-                DriveConstants.CENTER_WHEEL_OFFSET);
-
-        kinematics = new MecanumDriveKinematics(new Translation2d(DriveConstants.leftFront_x,DriveConstants.leftFront_y),
-                new Translation2d(DriveConstants.rightFront_x,DriveConstants.rightFront_y),
-                new Translation2d(DriveConstants.leftBack_x,DriveConstants.leftBack_y),
-                new Translation2d(DriveConstants.rightBack_x,DriveConstants.rightBack_y)
-        );
     }
 
     @Override
     public void periodic() {
-        odometry.updatePose();
-    }
-
-    public Pose2d getCurrentPose() {
-        return odometry.getPose();
     }
 
     public double getHeading() {
-        return imu.getHeading();
+        return this.imu.getHeading();
     }
     public void drive(double strafeSpeed, double forwardSpeed, double turnSpeed, double gyroHeading) {
-        m_drive.driveFieldCentric(strafeSpeed, forwardSpeed, turnSpeed, gyroHeading );
+        this.m_drive.driveFieldCentric(strafeSpeed, forwardSpeed, turnSpeed, gyroHeading );
     }
 
 }
