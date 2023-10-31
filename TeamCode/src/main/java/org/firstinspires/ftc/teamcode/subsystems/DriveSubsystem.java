@@ -54,6 +54,7 @@ public class DriveSubsystem extends SubsystemBase {
         this.rightEncoder = rightEncoder;
         this.latEncoder = latEncoder;
         this.imu = imu;
+        this.m_drive = new MecanumDrive(this.leftFront,this.rightFront,this.leftBack,this.rightBack);
 
         odometry = new HolonomicOdometry(leftEncoder::getDistance,
                 rightEncoder::getDistance,
