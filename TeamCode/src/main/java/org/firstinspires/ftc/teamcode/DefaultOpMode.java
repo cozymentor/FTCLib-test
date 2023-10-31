@@ -19,7 +19,7 @@ public class DefaultOpMode extends CommandOpMode {
 
     @Override
     public void initialize() {
-        m_robotContainer = new RobotContainer(hardwareMap);
+        m_robotContainer = new RobotContainer(hardwareMap, gamepad1);
         CommandScheduler.getInstance().reset();
 
         while (opModeInInit()) {
