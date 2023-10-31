@@ -69,12 +69,12 @@ public class LowLevelOpMode extends CommandOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        fl = new MotorEx(hardwareMap, "frontLeft");
-        fr = new MotorEx(hardwareMap, "frontRight");
-        bl = new MotorEx(hardwareMap, "backLeft");
-        br = new MotorEx(hardwareMap, "backRight");
-        imu = new RevIMU(hardwareMap,"imu");
-        m_drive = new MecanumDrive(fl,fr,bl,br);
+        fl = new MotorEx(hardwareMap, "frontLeft", Motor.GoBILDA.RPM_223);
+        fr = new MotorEx(hardwareMap, "frontRight", Motor.GoBILDA.RPM_223);
+        bl = new MotorEx(hardwareMap, "backLeft", Motor.GoBILDA.RPM_223);
+        br = new MotorEx(hardwareMap, "backRight", Motor.GoBILDA.RPM_223);
+        imu = new RevIMU(hardwareMap, "imu");
+        m_drive = new MecanumDrive(fl, fr, bl, br);
         m_gamePad = new GamepadEx(gamepad1);
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
@@ -84,13 +84,16 @@ public class LowLevelOpMode extends CommandOpMode {
         fr.setInverted(false);
         bl.setInverted(true);
         br.setInverted(false);
+        imu.init();
         m_gamePad.getGamepadButton(GamepadKeys.Button.A)
                 .whenPressed(new InstantCommand());
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
+    }
 
-        // run until the end of the match (driver presses STOP)
+    // run until the end of the match (driver presses STOP)
+    public void run() {
         while (opModeIsActive()) {
 
             // Setup a variable for each drive wheel to save power level for telemetry
@@ -102,7 +105,7 @@ public class LowLevelOpMode extends CommandOpMode {
             // POV Mode uses left stick to go forward, and right stick to turn.
             // - This uses basic math to combine motions and is easier to drive straight.
             double drive = m_gamePad.getLeftY();
-            double turn  = m_gamePad.getLeftX();
+            double turn = m_gamePad.getLeftX();
             double strafe = m_gamePad.getRightX();
             double heading = imu.getHeading();
 
@@ -112,7 +115,7 @@ public class LowLevelOpMode extends CommandOpMode {
             // rightPower = -gamepad1.right_stick_y ;
 
             // Send calculated power to wheels
-            m_drive.driveFieldCentric(strafe,drive,turn,heading);
+            m_drive.driveFieldCentric(strafe, drive, turn, heading);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());

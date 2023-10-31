@@ -13,9 +13,9 @@ import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 
 public class RobotContainer {
 
-    private final DriveSubsystem m_drive = new DriveSubsystem();
+    public final DriveSubsystem m_drive = new DriveSubsystem();
 
-    GamepadEx m_gamePad;
+    private GamepadEx m_gamePad;
     public RobotContainer(HardwareMap hardwareMap, Gamepad gamePad) {
         m_drive.init(hardwareMap);
         m_gamePad = new GamepadEx(gamePad);
