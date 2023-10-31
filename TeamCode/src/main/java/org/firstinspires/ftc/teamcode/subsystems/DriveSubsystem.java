@@ -25,6 +25,7 @@ public class DriveSubsystem extends SubsystemBase {
     private MotorGroup leftMotors, rightMotors;
 
     private Motor leftFront, rightFront, leftBack, rightBack;
+    private HardwareMap hardwareMap;
 
     private MecanumDrive m_drive;
     private MotorEx leftEncoder, rightEncoder, latEncoder;
@@ -32,7 +33,7 @@ public class DriveSubsystem extends SubsystemBase {
     private HolonomicOdometry odometry;
     private MecanumDriveKinematics kinematics;
 
-    public DriveSubsystem(final HardwareMap hardwareMap) {
+    public DriveSubsystem() {
         leftFront = new Motor(hardwareMap, "front_left");
         rightFront = new Motor(hardwareMap, "front_right");
         leftBack = new Motor(hardwareMap, "back_left");

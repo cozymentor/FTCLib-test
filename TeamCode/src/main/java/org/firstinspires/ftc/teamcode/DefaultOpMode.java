@@ -21,6 +21,7 @@ public class DefaultOpMode extends CommandOpMode {
     public void initialize() {
         m_robotContainer = new RobotContainer();
         CommandScheduler.getInstance().reset();
+
         while (opModeInInit()) {
             telemetry.addLine("Robot Initialized. Mason is very cool and he is the best perosn to ever exist in the owrld and java ois the owrst progmraming kanguage nad ih ate it so so os much LLL + Ratio + cope + cget out of my game L");
             telemetry.update();

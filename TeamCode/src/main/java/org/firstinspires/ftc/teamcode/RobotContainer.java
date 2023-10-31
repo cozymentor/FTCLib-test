@@ -10,8 +10,8 @@ import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 
 public class RobotContainer {
-    private HardwareMap m_hardwareMap;
-    private final DriveSubsystem m_drive = new DriveSubsystem(m_hardwareMap);
+
+    private final DriveSubsystem m_drive = new DriveSubsystem();
     GamepadEx m_gamePad;
     public RobotContainer() {
         configureButtonBindings();
