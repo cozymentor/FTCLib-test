@@ -25,7 +25,6 @@ public class DriveSubsystem extends SubsystemBase {
     private MotorGroup leftMotors, rightMotors;
 
     private Motor leftFront, rightFront, leftBack, rightBack;
-    private HardwareMap hardwareMap;
 
     private MecanumDrive m_drive;
     private MotorEx leftEncoder, rightEncoder, latEncoder;
@@ -34,6 +33,10 @@ public class DriveSubsystem extends SubsystemBase {
     private MecanumDriveKinematics kinematics;
 
     public DriveSubsystem() {
+
+    }
+
+    public void init(HardwareMap hardwareMap) {
         leftFront = new Motor(hardwareMap, "front_left");
         rightFront = new Motor(hardwareMap, "front_right");
         leftBack = new Motor(hardwareMap, "back_left");
@@ -53,15 +56,15 @@ public class DriveSubsystem extends SubsystemBase {
         this.imu = imu;
 
         odometry = new HolonomicOdometry(leftEncoder::getDistance,
-                                        rightEncoder::getDistance,
-                                        latEncoder::getDistance,
-                                        DriveConstants.TRACK_WIDTH,
-                                        DriveConstants.CENTER_WHEEL_OFFSET);
+                rightEncoder::getDistance,
+                latEncoder::getDistance,
+                DriveConstants.TRACK_WIDTH,
+                DriveConstants.CENTER_WHEEL_OFFSET);
 
         kinematics = new MecanumDriveKinematics(new Translation2d(DriveConstants.leftFront_x,DriveConstants.leftFront_y),
-                                                new Translation2d(DriveConstants.rightFront_x,DriveConstants.rightFront_y),
-                                                new Translation2d(DriveConstants.leftBack_x,DriveConstants.leftBack_y),
-                                                new Translation2d(DriveConstants.rightBack_x,DriveConstants.rightBack_y)
+                new Translation2d(DriveConstants.rightFront_x,DriveConstants.rightFront_y),
+                new Translation2d(DriveConstants.leftBack_x,DriveConstants.leftBack_y),
+                new Translation2d(DriveConstants.rightBack_x,DriveConstants.rightBack_y)
         );
     }
 
