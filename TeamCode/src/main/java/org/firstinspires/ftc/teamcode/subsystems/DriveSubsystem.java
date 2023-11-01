@@ -34,10 +34,11 @@ public class DriveSubsystem extends SubsystemBase {
         this.leftBack = new MotorEx(hardwareMap, HardwareMapConstants.leftBack, Motor.GoBILDA.RPM_223);
         this.rightBack = new MotorEx(hardwareMap, HardwareMapConstants.rightBack, Motor.GoBILDA.RPM_223);
         this.imu = new RevIMU(hardwareMap);
-        this.imu.init();
+
         this.m_drive = new MecanumDrive(this.leftFront,this.rightFront,this.leftBack,this.rightBack);
         this.telemetry = telemetry;
         //Initialization section
+        this.imu.init();
         this.leftFront.setInverted(true);
         this.rightFront.setInverted(true);
         this.leftBack.setInverted(true);
