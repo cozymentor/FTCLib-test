@@ -10,12 +10,12 @@ import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 public class DefaultDriveCommand extends CommandBase {
 
     private final DriveSubsystem m_drive;
-    private double m_leftX;
-    private double m_leftY;
-    private double m_rightX;
-    private double  m_heading;
+    private DoubleSupplier m_leftX;
+    private DoubleSupplier m_leftY;
+    private DoubleSupplier m_rightX;
+    private DoubleSupplier  m_heading;
 
-    public DefaultDriveCommand(DriveSubsystem drive, double leftX, double leftY, double rightX, double heading){
+    public DefaultDriveCommand(DriveSubsystem drive, DoubleSupplier leftX, DoubleSupplier leftY, DoubleSupplier rightX, DoubleSupplier heading){
         m_drive = drive;
         m_leftX = leftX;
         m_leftY = leftY;
@@ -28,6 +28,11 @@ public class DefaultDriveCommand extends CommandBase {
 
     @Override
     public void execute() {
-        m_drive.drive(m_leftX, m_leftY, m_rightX, m_heading);
+        m_drive.drive(m_leftX.getAsDouble(), m_leftY.getAsDouble(), m_rightX.getAsDouble(), m_heading.getAsDouble());
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
     }
 }

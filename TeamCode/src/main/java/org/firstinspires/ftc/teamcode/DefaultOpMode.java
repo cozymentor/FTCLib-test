@@ -28,16 +28,19 @@ public class DefaultOpMode extends CommandOpMode {
     private DefaultDriveCommand driveCommand;
     @Override
     public void initialize() {
-
+        driver_op = new GamepadEx(gamepad1); //Convert default gamepad object to GamepadEx object
+        //Initialize Subsystems
         m_drive = new DriveSubsystem(hardwareMap, telemetry);
-        register(m_drive);
-        driver_op = new GamepadEx(gamepad1);
-        driveCommand = new DefaultDriveCommand(m_drive, driver_op.getLeftX(), driver_op.getLeftY(), driver_op.getRightX(), m_drive.getHeading());
+        register(m_drive);  //Register Subsystems
+
+        //Initialize Commands
+        driveCommand = new DefaultDriveCommand(m_drive, driver_op::getLeftX, driver_op::getLeftY, driver_op::getRightX, m_drive::getHeading);
+        //Set Subsystem Default Commands
         m_drive.setDefaultCommand(driveCommand);
         super.reset();
 
 
-
+        //Runs while robot in Init stage
         while (opModeInInit()) {
             telemetry.addLine("Robot Initialized.");
             telemetry.update();
