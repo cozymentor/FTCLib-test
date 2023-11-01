@@ -24,11 +24,8 @@ import org.firstinspires.ftc.teamcode.DriveConstants;
 public class DriveSubsystem extends SubsystemBase {
     private final MotorEx leftFront, rightFront, leftBack, rightBack;
     private final MecanumDrive m_drive;
-    private MotorEx leftEncoder, rightEncoder, latEncoder;
     private final GyroEx imu;
     private final Telemetry telemetry;
-    private HolonomicOdometry odometry;
-    private MecanumDriveKinematics kinematics;
 
     public DriveSubsystem(HardwareMap hardwareMap, Telemetry telemetry) {
         this.leftFront = new MotorEx(hardwareMap, "front_left", Motor.GoBILDA.RPM_223);
@@ -39,6 +36,11 @@ public class DriveSubsystem extends SubsystemBase {
         this.imu.init();
         this.m_drive = new MecanumDrive(this.leftFront,this.rightFront,this.leftBack,this.rightBack);
         this.telemetry = telemetry;
+
+        this.leftFront.setInverted(true);
+        this.rightFront.setInverted(true);
+        this.leftBack.setInverted(true);
+        this.rightBack.setInverted(true);
     }
 
     @Override

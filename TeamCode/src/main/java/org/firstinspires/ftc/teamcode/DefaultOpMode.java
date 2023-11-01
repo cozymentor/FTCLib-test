@@ -22,11 +22,9 @@ import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 
 public class DefaultOpMode extends CommandOpMode {
     private DriveSubsystem m_drive;
-    private MotorEx fl, fr, bl,br;
     private GamepadEx driver_op;
-    private RevIMU imu;
-
     private DefaultDriveCommand driveCommand;
+
     @Override
     public void initialize() {
         driver_op = new GamepadEx(gamepad1); //Convert default gamepad object to GamepadEx object
