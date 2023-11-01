@@ -43,6 +43,7 @@ public class DriveSubsystem extends SubsystemBase {
         this.rightFront.setInverted(true);
         this.leftBack.setInverted(true);
         this.rightBack.setInverted(true);
+        System.out.println("Heck");
     }
 
     @Override
