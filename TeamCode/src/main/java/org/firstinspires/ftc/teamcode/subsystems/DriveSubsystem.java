@@ -18,33 +18,37 @@ import com.arcrobotics.ftclib.kinematics.wpilibkinematics.DifferentialDriveWheel
 import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveKinematics;
 import com.arcrobotics.ftclib.kinematics.wpilibkinematics.MecanumDriveWheelSpeeds;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.DriveConstants;
 
 public class DriveSubsystem extends SubsystemBase {
 
-    private MotorGroup leftMotors, rightMotors;
-
-    private Motor leftFront, rightFront, leftBack, rightBack;
+    private MotorEx leftFront, rightFront, leftBack, rightBack;
 
     private MecanumDrive m_drive;
     private MotorEx leftEncoder, rightEncoder, latEncoder;
     private GyroEx imu;
+
+    private Telemetry telemetry;
     private HolonomicOdometry odometry;
     private MecanumDriveKinematics kinematics;
 
-    public DriveSubsystem(MotorEx frontLeft, MotorEx frontRight, MotorEx backLeft, MotorEx backRight, RevIMU imu) {
-        this.leftFront = leftFront;
-        this.rightFront = rightFront;
-        this.leftBack = leftBack;
-        this.rightBack = rightBack;
-        this.imu = imu;
+    public DriveSubsystem(HardwareMap hardwareMap, Telemetry telemetry) {
+        this.leftFront = new MotorEx(hardwareMap, "front_left", Motor.GoBILDA.RPM_223);
+        this.rightFront = new MotorEx(hardwareMap, "front_right", Motor.GoBILDA.RPM_223);
+        this.leftBack = new MotorEx(hardwareMap, "back_left", Motor.GoBILDA.RPM_223);
+        this.rightBack = new MotorEx(hardwareMap, "back_right", Motor.GoBILDA.RPM_223);
+        this.imu = new RevIMU(hardwareMap);
         this.imu.init();
         this.m_drive = new MecanumDrive(this.leftFront,this.rightFront,this.leftBack,this.rightBack);
+        this.telemetry = telemetry;
 
     }
 
     @Override
     public void periodic() {
+        this.telemetry.addLine("Drive Subsystem: online");
+        this.telemetry.update();
     }
 
     public double getHeading() {

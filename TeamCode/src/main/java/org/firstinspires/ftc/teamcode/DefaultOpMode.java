@@ -14,6 +14,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.RobotTeleopPOV_Linear;
+import org.firstinspires.ftc.teamcode.commands.DefaultDriveCommand;
 import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 
 @TeleOp(name = "DefaultOpMode")
@@ -21,28 +22,26 @@ import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 public class DefaultOpMode extends CommandOpMode {
     private DriveSubsystem m_drive;
     private MotorEx fl, fr, bl,br;
+    private GamepadEx driver_op;
     private RevIMU imu;
+
+    private DefaultDriveCommand driveCommand;
     @Override
     public void initialize() {
-        fl = new MotorEx(hardwareMap, "front_left", Motor.GoBILDA.RPM_223);
-        fr = new MotorEx(hardwareMap, "front_right", Motor.GoBILDA.RPM_223);
-        bl = new MotorEx(hardwareMap, "back_left", Motor.GoBILDA.RPM_223);
-        br = new MotorEx(hardwareMap, "back_right", Motor.GoBILDA.RPM_223);
-        imu = new RevIMU(hardwareMap);
-        m_drive = new DriveSubsystem(fl,fr,bl,br,imu);
-        CommandScheduler.getInstance().reset();
 
-        register();
+        m_drive = new DriveSubsystem(hardwareMap, telemetry);
+        register(m_drive);
+        driver_op = new GamepadEx(gamepad1);
+        driveCommand = new DefaultDriveCommand(m_drive, driver_op.getLeftX(), driver_op.getLeftY(), driver_op.getRightX(), m_drive.getHeading());
+        m_drive.setDefaultCommand(driveCommand);
+        super.reset();
+
+
 
         while (opModeInInit()) {
             telemetry.addLine("Robot Initialized.");
             telemetry.update();
         }
     }
-    public void run() {
-        while(opModeIsActive()){
-            telemetry.addLine("Robot Running.");
-            telemetry.update();
-            super.run();}
-    }
+
 }
