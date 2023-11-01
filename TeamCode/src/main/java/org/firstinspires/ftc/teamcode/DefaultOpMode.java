@@ -47,14 +47,11 @@ public class DefaultOpMode extends CommandOpMode {
             telemetry.addLine("Robot Initialized.");
             telemetry.update();
         }
-
     }
-
     private void configureButtonBindings(){
         //put all button bindings here
         driver_op.getGamepadButton(GamepadKeys.Button.A)
                 .whenPressed(new InstantCommand());
     }
-
-
+    
 }

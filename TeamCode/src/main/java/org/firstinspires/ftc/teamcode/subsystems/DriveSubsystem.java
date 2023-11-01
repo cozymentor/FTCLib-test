@@ -22,14 +22,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.DriveConstants;
 
 public class DriveSubsystem extends SubsystemBase {
-
-    private MotorEx leftFront, rightFront, leftBack, rightBack;
-
-    private MecanumDrive m_drive;
+    private final MotorEx leftFront, rightFront, leftBack, rightBack;
+    private final MecanumDrive m_drive;
     private MotorEx leftEncoder, rightEncoder, latEncoder;
-    private GyroEx imu;
-
-    private Telemetry telemetry;
+    private final GyroEx imu;
+    private final Telemetry telemetry;
     private HolonomicOdometry odometry;
     private MecanumDriveKinematics kinematics;
 
@@ -42,7 +39,6 @@ public class DriveSubsystem extends SubsystemBase {
         this.imu.init();
         this.m_drive = new MecanumDrive(this.leftFront,this.rightFront,this.leftBack,this.rightBack);
         this.telemetry = telemetry;
-
     }
 
     @Override
@@ -54,6 +50,7 @@ public class DriveSubsystem extends SubsystemBase {
     public double getHeading() {
         return this.imu.getHeading();
     }
+
     public void drive(double strafeSpeed, double forwardSpeed, double turnSpeed, double gyroHeading) {
         this.m_drive.driveFieldCentric(strafeSpeed, forwardSpeed, turnSpeed, gyroHeading );
     }
