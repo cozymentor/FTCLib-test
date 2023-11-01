@@ -3,8 +3,14 @@ package org.firstinspires.ftc.teamcode;
 //import com.acmerobotics.dashboard.config.Config;
 
 
-public class DriveConstants {
+public class Constants {
 
+    public static final class HardwareMapConstants {
+        public static final String leftFront = "leftFront";
+        public static final String rightFront = "rightFront";
+        public static final String leftBack = "leftBack";
+        public static final String rightBack = "rightBack";
+    }
     public static double TICKS_PER_REV = 383.6;
     public static double WHEEL_DIAMETER = 0.1;
     public static double DISTANCE_PER_PULSE = WHEEL_DIAMETER * Math.PI / TICKS_PER_REV;
@@ -30,5 +36,7 @@ public class DriveConstants {
 
     public static double B = 2.0;
     public static double ZETA = 0.7;
+
+
 
 }
