@@ -33,7 +33,7 @@ public class DriveSubsystem extends SubsystemBase {
         this.rightFront = new MotorEx(hardwareMap, HardwareMapConstants.rightFront, Motor.GoBILDA.RPM_223);
         this.leftBack = new MotorEx(hardwareMap, HardwareMapConstants.leftBack, Motor.GoBILDA.RPM_223);
         this.rightBack = new MotorEx(hardwareMap, HardwareMapConstants.rightBack, Motor.GoBILDA.RPM_223);
-        this.imu = new RevIMU(hardwareMap);
+        this.imu = new RevIMU(hardwareMap, HardwareMapConstants.imu);
 
         this.m_drive = new MecanumDrive(this.leftFront,this.rightFront,this.leftBack,this.rightBack);
         this.telemetry = telemetry;

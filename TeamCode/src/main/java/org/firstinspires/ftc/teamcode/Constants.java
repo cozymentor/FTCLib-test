@@ -10,6 +10,7 @@ public class Constants {
         public static final String rightFront = "rightFront";
         public static final String leftBack = "leftBack";
         public static final String rightBack = "rightBack";
+        public static final String imu = "imu";
     }
 
     public static final class DriveConstants {
