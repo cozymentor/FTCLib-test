@@ -81,9 +81,9 @@ public class LowLevelOpMode extends CommandOpMode {
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
         fl.setInverted(true);
-        fr.setInverted(false);
+        fr.setInverted(true);
         bl.setInverted(true);
-        br.setInverted(false);
+        br.setInverted(true);
         imu.init();
         m_gamePad.getGamepadButton(GamepadKeys.Button.A)
                 .whenPressed(new InstantCommand());
@@ -105,8 +105,8 @@ public class LowLevelOpMode extends CommandOpMode {
             // POV Mode uses left stick to go forward, and right stick to turn.
             // - This uses basic math to combine motions and is easier to drive straight.
             double drive = m_gamePad.getLeftY();
-            double turn = m_gamePad.getLeftX();
-            double strafe = m_gamePad.getRightX();
+            double strafe = m_gamePad.getLeftX();
+            double turn = m_gamePad.getRightX();
             double heading = imu.getHeading();
 
             // Tank Mode uses one stick to control each wheel.

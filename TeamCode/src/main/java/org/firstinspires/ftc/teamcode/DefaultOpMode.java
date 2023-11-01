@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.CommandScheduler;
+import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.Robot;
 import com.arcrobotics.ftclib.command.button.Button;
 import com.arcrobotics.ftclib.command.button.GamepadButton;
@@ -37,6 +38,7 @@ public class DefaultOpMode extends CommandOpMode {
         driveCommand = new DefaultDriveCommand(m_drive, driver_op::getLeftX, driver_op::getLeftY, driver_op::getRightX, m_drive::getHeading);
         //Set Subsystem Default Commands
         m_drive.setDefaultCommand(driveCommand);
+        configureButtonBindings(); //Runs the configureButtonBindings() method below,
         super.reset();
 
 
@@ -45,6 +47,14 @@ public class DefaultOpMode extends CommandOpMode {
             telemetry.addLine("Robot Initialized.");
             telemetry.update();
         }
+
     }
+
+    private void configureButtonBindings(){
+        //put all button bindings here
+        driver_op.getGamepadButton(GamepadKeys.Button.A)
+                .whenPressed(new InstantCommand());
+    }
+
 
 }
