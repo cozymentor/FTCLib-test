@@ -30,13 +30,16 @@ public class DefaultOpMode extends CommandOpMode {
         driver_op = new GamepadEx(gamepad1); //Convert default gamepad object to GamepadEx object
         //Initialize Subsystems
         m_drive = new DriveSubsystem(hardwareMap, telemetry);
-        register(m_drive);  //Register Subsystems
 
         //Initialize Commands
         driveCommand = new DefaultDriveCommand(m_drive, driver_op::getLeftX, driver_op::getLeftY, driver_op::getRightX, m_drive::getHeading);
+
         //Set Subsystem Default Commands
         m_drive.setDefaultCommand(driveCommand);
+
+        register(m_drive);  //Register Subsystems
         configureButtonBindings(); //Runs the configureButtonBindings() method below,
+
         super.reset();
 
 
@@ -45,7 +48,9 @@ public class DefaultOpMode extends CommandOpMode {
             telemetry.addLine("Robot Initialized.");
             telemetry.update();
         }
+
     }
+
     private void configureButtonBindings(){
         //put all button bindings here
         driver_op.getGamepadButton(GamepadKeys.Button.A)
